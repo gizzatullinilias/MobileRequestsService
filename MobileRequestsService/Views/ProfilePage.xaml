@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileRequestsService.Views.ProfilePage"
+             Title="Profile"
+             BackgroundColor="{StaticResource LightGray}">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource White}">
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Профиль пользователя"
+                       FontSize="Title"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+
+                <Label Text="{Binding UserData.Username, StringFormat='Username: {0}'}"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+                <Label Text="{Binding UserData.LastName, StringFormat='LastName: {0}'}"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+                <Label Text="{Binding UserData.FirstName, StringFormat='FirstName: {0}'}"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+                <Label Text="{Binding UserData.MiddleName, StringFormat='MiddleName: {0}'}"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+                <Label Text="{Binding UserData.Role, StringFormat='Role: {0}'}"
+                       TextColor="{StaticResource PrimaryTextColor}"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Text="Выход"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="{StaticResource SecondaryColor}"
+                TextColor="White"
+                CornerRadius="8"/>
+
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="Red"
+               IsVisible="{Binding ErrorMessage}"/>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource PrimaryColor}"/>
+
+    </VerticalStackLayout>
+</ContentPage>

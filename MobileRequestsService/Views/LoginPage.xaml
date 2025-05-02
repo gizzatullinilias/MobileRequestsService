@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileRequestsService.Views.LoginPage"
+             xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
+             x:DataType="vm:LoginViewModel"
+             Title="Login"
+             BackgroundColor="{StaticResource LightGray}">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Username:"
+               TextColor="{StaticResource PrimaryTextColor}"
+               FontSize="Medium"/>
+        <Entry Text="{Binding Username}"
+               Placeholder="Введите пользовательское имя"
+               TextColor="{StaticResource SecondaryTextColor}"
+               PlaceholderColor="{StaticResource PlaceholderColor}"/>
+
+        <Label Text="Password:"
+               TextColor="{StaticResource PrimaryTextColor}"
+               FontSize="Medium"/>
+        <Entry Text="{Binding Password}"
+               IsPassword="True"
+               Placeholder="Введите пароль"
+               TextColor="{StaticResource SecondaryTextColor}"
+               PlaceholderColor="{StaticResource PlaceholderColor}"/>
+
+        <Button Text="Вход"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding !IsBusy}"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                TextColor="White"
+                CornerRadius="8"/>
+
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="Red"
+               IsVisible="{Binding ErrorMessage}"/>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource PrimaryColor}"/>
+
+    </VerticalStackLayout>
+</ContentPage>
