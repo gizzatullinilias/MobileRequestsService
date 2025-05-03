@@ -54,8 +54,9 @@ namespace MobileRequestsService.ViewModels
 
         private async void OnLogout()
         {
-            await SecureStorage.Default.RemoveAsync("access_token");
-            await SecureStorage.Default.RemoveAsync("refresh_token");
+            SecureStorage.Default.RemoveAll();
+            //await SecureStorage.Default.RemoveAsync("access_token");
+            //await SecureStorage.Default.RemoveAsync("refresh_token");
             await Shell.Current.GoToAsync("//LoginPage");
         }
         private async Task LoadUserDataAsync()

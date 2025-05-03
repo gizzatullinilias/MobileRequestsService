@@ -1,9 +1,12 @@
+using MobileRequestsService.ViewModels;
+
 namespace MobileRequestsService.Views;
 
 public partial class ProfilePage : ContentPage
 {
-	public ProfilePage()
+	public ProfilePage(ProfileViewModel profileView)
 	{
 		InitializeComponent();
+		BindingContext = profileView;
 	}
 }

@@ -125,9 +125,10 @@ namespace MobileRequestsService.Services
         public async Task<bool> ClearTokensAsync()
         {
             try
-            {
-                await SecureStorage.Default.RemoveAsync(AccessTokenKey);
-                await SecureStorage.Default.RemoveAsync(RefreshTokenKey);
+            { 
+                SecureStorage.Default.RemoveAll();
+                //await SecureStorage.Default.RemoveAsync("access_token");
+                //await SecureStorage.Default.RemoveAsync("refresh_token");
                 return true;
             }
             catch

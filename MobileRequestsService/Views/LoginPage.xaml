@@ -28,7 +28,6 @@
 
         <Button Text="Вход"
                 Command="{Binding LoginCommand}"
-                IsEnabled="{Binding !IsBusy}"
                 BackgroundColor="{StaticResource PrimaryColor}"
                 TextColor="White"
                 CornerRadius="8"/>
@@ -37,9 +36,9 @@
                TextColor="Red"
                IsVisible="{Binding ErrorMessage}"/>
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}"
+        <!--<ActivityIndicator IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
-                           Color="{StaticResource PrimaryColor}"/>
+                           Color="{StaticResource PrimaryColor}"/>-->
 
     </VerticalStackLayout>
 </ContentPage>

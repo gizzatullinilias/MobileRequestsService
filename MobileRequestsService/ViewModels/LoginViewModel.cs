@@ -11,7 +11,7 @@ namespace MobileRequestsService.ViewModels
     {
         private string? _username;
         private string? _password;
-        private bool _isBusy;
+        //private bool _isBusy;
         private string? _errorMessage;
         private readonly AuthenticationService _authService;
 
@@ -43,16 +43,6 @@ namespace MobileRequestsService.ViewModels
             }
         }
 
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set
-            {
-                _isBusy = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string? ErrorMessage
         {
             get => _errorMessage;
@@ -67,41 +57,34 @@ namespace MobileRequestsService.ViewModels
 
         private async Task OnLoginClicked()
         {
-            if (IsBusy) return;
-            IsBusy = true;
-            ErrorMessage = string.Empty;
-
             var loginRequest = new LoginRequest
             {
                 Username = Username,
                 Password = Password
             };
 
-            try
-            {
+            //try
+            //{
                 var authResponse = await _authService.LoginAsync(loginRequest);
 
                 if (authResponse != null && !string.IsNullOrEmpty(authResponse.AccessToken))
                 {
                     await Shell.Current.GoToAsync("//ProfilePage");
                 }
-                else
+                else 
                 {
-                    ErrorMessage = "Invalid username or password.";
+                    ErrorMessage = "Неверное имя пользователя или пароль.";
                     await App.Current.MainPage.DisplayAlert("Login Failed", ErrorMessage, "OK");
                 }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ErrorMessage = "Произошла непредвиденная ошибка.";
+            //    Console.WriteLine($"Login error: {ex}");
+            //    await App.Current.MainPage.DisplayAlert("Login Error", ErrorMessage, "OK");
+            //}
+           
             }
-            catch (Exception ex)
-            {
-                ErrorMessage = "An unexpected error occurred.";
-                Console.WriteLine($"Login error: {ex}");
-                await App.Current.MainPage.DisplayAlert("Login Error", ErrorMessage, "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

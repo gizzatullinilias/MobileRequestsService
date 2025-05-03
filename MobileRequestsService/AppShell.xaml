@@ -3,7 +3,7 @@
     x:Class="MobileRequestsService.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MobileRequestsService.Views"
+    xmlns:views="clr-namespace:MobileRequestsService.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="MobileRequestsService">
 
@@ -12,7 +12,7 @@
             <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Shell.ForegroundColor" Value="White" />
             <Setter Property="Shell.TitleColor" Value="White" />
-            <Setter Property="Shell.SubtitleColor" Value="White" />
+            <!--<Setter Property="Shell.SubtitleColor" Value="White" />-->
             <Setter Property="Shell.UnselectedColor" Value="White" />
             <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Shell.TabBarForegroundColor" Value="White" />
@@ -23,12 +23,12 @@
 
     <ShellContent
         Title="Login"
-        ContentTemplate="{DataTemplate View:LoginPage}"
-        Route="LoginPage" />
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="loginPage" />
 
     <ShellContent
         Title="Profile"
-        ContentTemplate="{DataTemplate View:ProfilePage}"
+        ContentTemplate="{DataTemplate views:ProfilePage}"
         Route="ProfilePage" />
 
 </Shell>

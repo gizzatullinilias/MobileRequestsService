@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileRequestsService.Views.ProfilePage"
+             xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
+             x:DataType="vm:ProfileViewModel"
              Title="Profile"
              BackgroundColor="{StaticResource LightGray}">
 
@@ -37,9 +39,9 @@
                TextColor="Red"
                IsVisible="{Binding ErrorMessage}"/>
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}"
+        <!--<ActivityIndicator IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
-                           Color="{StaticResource PrimaryColor}"/>
+                           Color="{StaticResource PrimaryColor}"/>-->
 
     </VerticalStackLayout>
 </ContentPage>
