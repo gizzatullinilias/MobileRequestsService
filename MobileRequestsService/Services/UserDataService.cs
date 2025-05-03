@@ -8,7 +8,7 @@ namespace MobileRequestsService.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AuthenticationService _authService;
-        private readonly string _apiBaseUrl = "http://localhost:9090/api";
+        private readonly string _apiBaseUrl = "http://10.0.2.2:9090/api";
 
         public UserDataService(HttpClient httpClient, AuthenticationService authService)
         {

@@ -12,7 +12,7 @@ namespace MobileRequestsService.Services
         private readonly HttpClient _httpClient;
         private const string AccessTokenKey = "access_token";
         private const string RefreshTokenKey = "refresh_token";
-        private readonly string _apiBaseUrl = "http://localhost:9090/api";
+        private readonly string _apiBaseUrl = "http://10.0.2.2:9090/api";
 
         public AuthenticationService(HttpClient httpClient)
         {

@@ -8,17 +8,17 @@
     Title="MobileRequestsService">
 
     <Shell.Resources>
-        <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <!--<Style TargetType="Shell" ApplyToDerivedTypes="True">
             <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Shell.ForegroundColor" Value="White" />
             <Setter Property="Shell.TitleColor" Value="White" />
-            <!--<Setter Property="Shell.SubtitleColor" Value="White" />-->
+            <Setter Property="Shell.SubtitleColor" Value="White" />
             <Setter Property="Shell.UnselectedColor" Value="White" />
             <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Shell.TabBarForegroundColor" Value="White" />
             <Setter Property="Shell.TabBarUnselectedColor" Value="LightGray" />
             <Setter Property="Shell.TabBarTitleColor" Value="White" />
-        </Style>
+        </Style>-->
     </Shell.Resources>
 
     <ShellContent

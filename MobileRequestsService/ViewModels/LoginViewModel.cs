@@ -63,8 +63,8 @@ namespace MobileRequestsService.ViewModels
                 Password = Password
             };
 
-            //try
-            //{
+            try
+            {
                 var authResponse = await _authService.LoginAsync(loginRequest);
 
                 if (authResponse != null && !string.IsNullOrEmpty(authResponse.AccessToken))
@@ -76,15 +76,15 @@ namespace MobileRequestsService.ViewModels
                     ErrorMessage = "Неверное имя пользователя или пароль.";
                     await App.Current.MainPage.DisplayAlert("Login Failed", ErrorMessage, "OK");
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ErrorMessage = "Произошла непредвиденная ошибка.";
-            //    Console.WriteLine($"Login error: {ex}");
-            //    await App.Current.MainPage.DisplayAlert("Login Error", ErrorMessage, "OK");
-            //}
-           
             }
+            catch (Exception ex)
+            {
+                ErrorMessage = "Произошла непредвиденная ошибка.";
+                Console.WriteLine($"Login error: {ex}");
+                await App.Current.MainPage.DisplayAlert("Login Error", ErrorMessage, "OK");
+            }
+
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

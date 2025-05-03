@@ -4,8 +4,8 @@
              x:Class="MobileRequestsService.Views.LoginPage"
              xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
              x:DataType="vm:LoginViewModel"
-             Title="Login"
-             BackgroundColor="{StaticResource LightGray}">
+             Title="Login">
+    <!--BackgroundColor="{StaticResource LightGray}">-->
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
