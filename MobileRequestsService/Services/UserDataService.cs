@@ -21,7 +21,7 @@ namespace MobileRequestsService.Services
             _authService.AddAuthorizationHeader();
             try
             {
-                var response = await _httpClient.GetAsync($"{_apiBaseUrl}/api/account/me");
+                var response = await _httpClient.GetAsync($"{_apiBaseUrl}/account/me");
                 response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync();
                 var userData = JsonSerializer.Deserialize<UserData>(responseString);

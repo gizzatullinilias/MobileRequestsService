@@ -26,7 +26,7 @@ namespace MobileRequestsService.Services
 
             try
             {
-                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/api/token", content);
+                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/token", content);
                 response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<AuthResponse>(responseString);
@@ -74,7 +74,7 @@ namespace MobileRequestsService.Services
 
             try
             {
-                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/api/token/refresh-token", content);
+                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/token/refresh-token", content);
                 response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<AuthResponse>(responseString);
