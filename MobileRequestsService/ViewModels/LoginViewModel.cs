@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using MobileRequestsService.Services;
 using MobileRequestsService.Models;
 using System.Threading.Tasks;
+using MobileRequestsService.Views;
 
 namespace MobileRequestsService.ViewModels
 {
@@ -69,7 +70,7 @@ namespace MobileRequestsService.ViewModels
 
                 if (authResponse != null && !string.IsNullOrEmpty(authResponse.AccessToken))
                 {
-                    await Shell.Current.GoToAsync("//ProfilePage");
+                    await AppShell.Current.GoToAsync(nameof(ProfilePage));
                 }
                 else 
                 {

@@ -30,15 +30,15 @@ namespace MobileRequestsService.ViewModels
             }
         }
 
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set
-            {
-                _isBusy = value;
-                OnPropertyChanged();
-            }
-        }
+        //public bool IsBusy
+        //{
+        //    get => _isBusy;
+        //    set
+        //    {
+        //        _isBusy = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public string? ErrorMessage
         {
@@ -61,9 +61,9 @@ namespace MobileRequestsService.ViewModels
         }
         private async Task LoadUserDataAsync()
         {
-            if (IsBusy) return;
-            IsBusy = true;
-            ErrorMessage = string.Empty;
+            //if (IsBusy) return;
+            //IsBusy = true;
+            //ErrorMessage = string.Empty;
 
             try
             {
@@ -78,10 +78,10 @@ namespace MobileRequestsService.ViewModels
                 Console.WriteLine($"Ошибка загрузки пользовательских данных: {ex.Message}");
                 ErrorMessage = "При загрузке пользовательских данных произошла непредвиденная ошибка.";
             }
-            finally
-            {
-                IsBusy = false;
-            }
+            //finally
+            //{
+            //    IsBusy = false;
+            //}
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
