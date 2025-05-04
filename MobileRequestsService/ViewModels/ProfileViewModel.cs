@@ -77,7 +77,7 @@ namespace MobileRequestsService.ViewModels
             {
                 Console.WriteLine($"Ошибка загрузки пользовательских данных: {ex.Message}");
                 ErrorMessage = "При загрузке пользовательских данных произошла непредвиденная ошибка.";
-            }
+                }
             //finally
             //{
             //    IsBusy = false;
