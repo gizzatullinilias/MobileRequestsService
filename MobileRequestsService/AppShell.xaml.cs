@@ -7,10 +7,6 @@ namespace MobileRequestsService
         public AppShell()
         {
             InitializeComponent();
-
-            //Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            //Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-            
         }
     }
 }

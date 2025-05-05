@@ -24,7 +24,7 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="loginPage" />
+        Route="LoginPage" />
 
     <ShellContent
         Title="Profile"
