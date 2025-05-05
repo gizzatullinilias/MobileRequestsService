@@ -4,8 +4,8 @@
              x:Class="MobileRequestsService.Views.ProfilePage"
              xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
              x:DataType="vm:ProfileViewModel"
-             Title="Profile"
-             BackgroundColor="{StaticResource LightGray}">
+             Title="Profile">
+    <!--BackgroundColor="{StaticResource LightGray}">-->
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
@@ -16,24 +16,24 @@
                        HorizontalOptions="Center"
                        TextColor="{StaticResource PrimaryTextColor}"/>
 
-                <Label Text="{Binding UserData.Username, StringFormat='Username: {0}'}"
-                       TextColor="{StaticResource PrimaryTextColor}"/>
-                <Label Text="{Binding UserData.LastName, StringFormat='LastName: {0}'}"
-                       TextColor="{StaticResource PrimaryTextColor}"/>
-                <Label Text="{Binding UserData.FirstName, StringFormat='FirstName: {0}'}"
-                       TextColor="{StaticResource PrimaryTextColor}"/>
-                <Label Text="{Binding UserData.MiddleName, StringFormat='MiddleName: {0}'}"
-                       TextColor="{StaticResource PrimaryTextColor}"/>
-                <Label Text="{Binding UserData.Role, StringFormat='Role: {0}'}"
-                       TextColor="{StaticResource PrimaryTextColor}"/>
+                <Label Text="{Binding UserData.Username, StringFormat='Username: {0}'}"/>
+                <!--TextColor="{StaticResource PrimaryTextColor}"/>-->
+                <Label Text="{Binding UserData.LastName, StringFormat='LastName: {0}'}"/>
+                <!--TextColor="{StaticResource PrimaryTextColor}"/>-->
+                <Label Text="{Binding UserData.FirstName, StringFormat='FirstName: {0}'}"/>
+                <!--TextColor="{StaticResource PrimaryTextColor}"/>-->
+                <Label Text="{Binding UserData.MiddleName, StringFormat='MiddleName: {0}'}"/>
+                <!--TextColor="{StaticResource PrimaryTextColor}"/>-->
+                <Label Text="{Binding UserData.Role, StringFormat='Role: {0}'}"/>
+                <!--TextColor="{StaticResource PrimaryTextColor}"/>-->
             </VerticalStackLayout>
         </Frame>
 
         <Button Text="Выход"
                 Command="{Binding LogoutCommand}"
-                BackgroundColor="{StaticResource SecondaryColor}"
                 TextColor="White"
                 CornerRadius="8"/>
+        <!--BackgroundColor="{StaticResource SecondaryColor}"-->
 
         <Label Text="{Binding ErrorMessage}"
                TextColor="Red"

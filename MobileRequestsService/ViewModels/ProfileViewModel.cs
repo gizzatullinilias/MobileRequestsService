@@ -10,7 +10,7 @@ namespace MobileRequestsService.ViewModels
     public class ProfileViewModel : INotifyPropertyChanged
     {
         private UserData? _userData;
-        private bool _isBusy;
+        //private bool _isBusy;
         private string? _errorMessage;
         private readonly UserDataService _userDataService;
 

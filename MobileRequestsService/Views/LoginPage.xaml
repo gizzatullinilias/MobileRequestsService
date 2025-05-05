@@ -10,27 +10,27 @@
     <VerticalStackLayout Padding="20" Spacing="15">
 
         <Label Text="Username:"
-               TextColor="{StaticResource PrimaryTextColor}"
                FontSize="Medium"/>
+               <!--TextColor="{StaticResource PrimaryTextColor}"-->
         <Entry Text="{Binding Username}"
-               Placeholder="Введите пользовательское имя"
-               TextColor="{StaticResource SecondaryTextColor}"
-               PlaceholderColor="{StaticResource PlaceholderColor}"/>
+               Placeholder="Введите пользовательское имя"/>
+        <!--PlaceholderColor="{StaticResource PlaceholderColor}"/>-->
+        <!--TextColor="{StaticResource SecondaryTextColor}"-->
 
         <Label Text="Password:"
-               TextColor="{StaticResource PrimaryTextColor}"
                FontSize="Medium"/>
+        <!--TextColor="{StaticResource PrimaryTextColor}"-->
         <Entry Text="{Binding Password}"
                IsPassword="True"
-               Placeholder="Введите пароль"
-               TextColor="{StaticResource SecondaryTextColor}"
-               PlaceholderColor="{StaticResource PlaceholderColor}"/>
+               Placeholder="Введите пароль"/>
+        <!--TextColor="{StaticResource SecondaryTextColor}"/>-->
+        <!--PlaceholderColor="{StaticResource PlaceholderColor}"/>-->
 
         <Button Text="Вход"
                 Command="{Binding LoginCommand}"
-                BackgroundColor="{StaticResource PrimaryColor}"
                 TextColor="White"
                 CornerRadius="8"/>
+        <!--BackgroundColor="{StaticResource PrimaryColor}"-->
 
         <Label Text="{Binding ErrorMessage}"
                TextColor="Red"
