@@ -35,6 +35,16 @@
                 CornerRadius="8"/>
         <!--BackgroundColor="{StaticResource SecondaryColor}"-->
 
+        <Button
+            Text="Новая заявка"
+            Command="{Binding GoToDocumentRequest}"
+            CornerRadius="8"/>
+
+        <Button
+            Text="История заявок"
+            Command="{Binding GoToDocumentHistory}"
+            CornerRadius="8"/>
+
         <Label Text="{Binding ErrorMessage}"
                TextColor="Red"
                IsVisible="{Binding ErrorMessage}"/>

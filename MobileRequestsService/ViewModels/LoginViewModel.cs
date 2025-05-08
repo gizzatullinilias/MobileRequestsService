@@ -70,7 +70,7 @@ namespace MobileRequestsService.ViewModels
 
                 if (authResponse != null && !string.IsNullOrEmpty(authResponse.AccessToken))
                 {
-                    await Shell.Current.GoToAsync("//ProfilePage");
+                    await AppShell.Current.GoToAsync( "//" + nameof(ProfilePage), true);
                 }
                 else 
                 {

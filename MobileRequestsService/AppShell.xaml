@@ -31,4 +31,14 @@
         ContentTemplate="{DataTemplate views:ProfilePage}"
         Route="ProfilePage" />
 
+    <ShellContent
+        Title="DocumentRequest"
+        ContentTemplate="{DataTemplate views:DocumentRequestPage}"
+        Route="DocumentRequestPage" />
+
+    <ShellContent
+        Title="DocumentHistory"
+        ContentTemplate="{DataTemplate views:DocumentHistoryPage}"
+        Route="DocumentHistoryPage" />
+
 </Shell>

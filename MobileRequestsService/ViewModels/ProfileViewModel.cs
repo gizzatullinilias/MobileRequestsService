@@ -4,6 +4,8 @@ using Microsoft.Maui.Controls;
 using MobileRequestsService.Services;
 using MobileRequestsService.Models;
 using System.Threading.Tasks;
+using MobileRequestsService.Views;
+
 
 namespace MobileRequestsService.ViewModels
 {
@@ -18,6 +20,9 @@ namespace MobileRequestsService.ViewModels
         {
             _userDataService = userDataService;
             LoadUserDataAsync();
+            LogoutCommand = new Command(async () => await OnLogout());
+            GoToDocumentRequest = new Command(async () => await GoToDocumentRequestPage());
+            GoToDocumentHistory = new Command(async () => await GoToDocumentHistoryPage());
         }
 
         public UserData? UserData
@@ -52,18 +57,34 @@ namespace MobileRequestsService.ViewModels
 
         public Command LogoutCommand { get; }
 
-        private async void OnLogout()
+        public async Task OnLogout()
         {
             SecureStorage.Default.RemoveAll();
             //await SecureStorage.Default.RemoveAsync("access_token");
             //await SecureStorage.Default.RemoveAsync("refresh_token");
-            await Shell.Current.GoToAsync("//LoginPage");
+            await AppShell.Current.GoToAsync("//" + nameof(LoginPage), true);
         }
-        private async Task LoadUserDataAsync()
+
+
+        public Command GoToDocumentRequest { get; }
+        public async Task GoToDocumentRequestPage()
+        {
+            await AppShell.Current.GoToAsync("//" + nameof(DocumentRequestPage), true);
+        }
+
+
+        public Command GoToDocumentHistory { get; }
+        public async Task GoToDocumentHistoryPage()
+        {
+            await AppShell.Current.GoToAsync("//" + nameof(DocumentHistoryPage), true);
+        }
+
+
+        public async Task LoadUserDataAsync()
         {
             //if (IsBusy) return;
             //IsBusy = true;
-            //ErrorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             try
             {

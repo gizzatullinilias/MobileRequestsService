@@ -137,19 +137,26 @@ namespace MobileRequestsService.Services
             }
         }
 
-        public void AddAuthorizationHeader()
+
+        public async Task AddAuthorizationHeader()
         {
-            if (IsTokenExpiredAsync().Result)
+            try
             {
-                RefreshAccessTokenAsync().Wait();
+                if (await IsTokenExpiredAsync())
+                {
+                    await RefreshAccessTokenAsync();
+                }
+
+                var accessToken = await GetAccessTokenAsync();
+
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    !string.IsNullOrEmpty(accessToken)
+                        ? new AuthenticationHeaderValue("Bearer", accessToken)
+                        : null;
             }
-            var accessToken = GetAccessTokenAsync().Result;
-            if (!string.IsNullOrEmpty(accessToken))
+            catch (Exception ex)
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            }
-            else
-            {
+                Console.WriteLine($"Ошибка установки заголовка: {ex.Message}");
                 _httpClient.DefaultRequestHeaders.Authorization = null;
             }
         }

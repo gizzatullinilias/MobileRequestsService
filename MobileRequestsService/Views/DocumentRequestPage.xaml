@@ -1,0 +1,47 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileRequestsService.Views.DocumentRequestPage"
+             Title="Подача заявления">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                              IsVisible="{Binding IsLoading}" />
+
+            <Label Text="{Binding ErrorMessage}" 
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}" />
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="Ваши данные:" FontAttributes="Bold"/>
+                    <Label Text="{Binding UserData.LastName, StringFormat='Фамилия: {0}'}"/>
+                    <Label Text="{Binding UserData.FirstName, StringFormat='Имя: {0}'}"/>
+                    <Label Text="{Binding UserData.MiddleName, StringFormat='Отчество: {0}'}"/>
+                </StackLayout>
+            </Frame>
+
+            <Picker Title="Тип документа" 
+                    ItemsSource="{Binding DocumentTypes}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedDocumentType}"/>
+
+            <Picker Title="Отдел" 
+                    ItemsSource="{Binding Departments}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedDepartment}"/>
+
+            <Stepper Minimum="1" Maximum="10" 
+                    Increment="1" 
+                    Value="{Binding Quantity}"/>
+            <Label Text="{Binding Quantity, StringFormat='Количество: {0}'}"
+                   HorizontalOptions="Center"/>
+
+            <Button Text="Подать заявление" 
+                    Command="{Binding SubmitCommand}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

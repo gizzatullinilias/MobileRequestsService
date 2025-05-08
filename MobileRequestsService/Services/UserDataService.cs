@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Net.Http.Headers;
 using MobileRequestsService.Models;
+using MobileRequestsService.Views;
 
 namespace MobileRequestsService.Services
 {
@@ -18,7 +19,7 @@ namespace MobileRequestsService.Services
 
         public async Task<UserData?> GetUserDataAsync()
         {
-            _authService.AddAuthorizationHeader();
+            await _authService.AddAuthorizationHeader();
             try
             {
                 var response = await _httpClient.GetAsync($"{_apiBaseUrl}/account/me");
