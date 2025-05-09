@@ -29,14 +29,19 @@ public static class MauiProgram
 #endif
 
         
-        builder.Services.AddHttpClient("ApiClient", client =>
-        {
-            client.BaseAddress = new Uri("http://10.0.2.2:9090/api");
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-        })
-            .AddHttpMessageHandler<AuthorizationHandler>();
+        //builder.Services.AddHttpClient("ApiClient", client =>
+        //{
+        //    client.BaseAddress = new Uri("http://10.0.2.2:9090/api");
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //        new MediaTypeWithQualityHeaderValue("application/json"));
+        //})
+        //    .AddHttpMessageHandler<AuthorizationHandler>();
 
+        builder.Services
+            .AddTransient<AuthorizationHandler>()
+            .AddHttpClient("ApiClient")
+            .ConfigureHttpClient(client => client.BaseAddress = new Uri("http://10.0.2.2:9090/api"))
+            .AddHttpMessageHandler<AuthorizationHandler>();
 
         builder.Services.AddSingleton<DocumentHistoryViewModel>();
         builder.Services.AddSingleton<DocumentService>();
