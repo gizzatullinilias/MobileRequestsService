@@ -1,40 +1,33 @@
-﻿using System.Text.Json;
+﻿using MobileRequestsService.Handlers;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using MobileRequestsService.Models;
-using MobileRequestsService.Views;
 
 namespace MobileRequestsService.Services
 {
     public class UserDataService
     {
-        private readonly HttpClient _httpClient;
-        private readonly AuthenticationService _authService;
-        private readonly string _apiBaseUrl = "http://10.0.2.2:9090/api";
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public UserDataService(HttpClient httpClient, AuthenticationService authService)
+        public UserDataService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
-            _authService = authService;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<UserData?> GetUserDataAsync()
         {
-            await _authService.AddAuthorizationHeader();
             try
             {
-                var response = await _httpClient.GetAsync($"{_apiBaseUrl}/account/me");
+                var httpClient = _httpClientFactory.CreateClient("ApiClient");
+                var response = await httpClient.GetAsync("account/me");
                 response.EnsureSuccessStatusCode();
-                var responseString = await response.Content.ReadAsStringAsync();
-                var userData = JsonSerializer.Deserialize<UserData>(responseString);
-                return userData;
+
+                using var stream = await response.Content.ReadAsStreamAsync();
+                return await JsonSerializer.DeserializeAsync<UserData>(stream);
             }
             catch (HttpRequestException ex)
             {
                 Console.WriteLine($"HTTP Request Error: {ex.Message}");
-                if (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    await _authService.ClearTokensAsync();
-                }
                 return null;
             }
         }

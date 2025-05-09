@@ -9,14 +9,13 @@ namespace MobileRequestsService.Services
 {
     public class AuthenticationService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private const string AccessTokenKey = "access_token";
         private const string RefreshTokenKey = "refresh_token";
-        private readonly string _apiBaseUrl = "http://10.0.2.2:9090/api";
 
-        public AuthenticationService(HttpClient httpClient)
+        public AuthenticationService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
          
         public async Task<AuthResponse?> LoginAsync(LoginRequest loginRequest)
@@ -26,7 +25,8 @@ namespace MobileRequestsService.Services
 
             try
             {
-                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/token", content);
+                var httpClient = _httpClientFactory.CreateClient("ApiClient");
+                var response = await httpClient.PostAsync("/token", content);
                 response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<AuthResponse>(responseString);
@@ -74,7 +74,8 @@ namespace MobileRequestsService.Services
 
             try
             {
-                var response = await _httpClient.PostAsync($"{_apiBaseUrl}/token/refresh-token", content);
+                var httpClient = _httpClientFactory.CreateClient("ApiClient");
+                var response = await httpClient.PostAsync("/token/refresh-token", content);
                 response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<AuthResponse>(responseString);
@@ -138,27 +139,27 @@ namespace MobileRequestsService.Services
         }
 
 
-        public async Task AddAuthorizationHeader()
-        {
-            try
-            {
-                if (await IsTokenExpiredAsync())
-                {
-                    await RefreshAccessTokenAsync();
-                }
+        //public async Task AddAuthorizationHeader()
+        //{
+        //    try
+        //    {
+        //        if (await IsTokenExpiredAsync())
+        //        {
+        //            await RefreshAccessTokenAsync();
+        //        }
 
-                var accessToken = await GetAccessTokenAsync();
+        //        var accessToken = await GetAccessTokenAsync();
 
-                _httpClient.DefaultRequestHeaders.Authorization =
-                    !string.IsNullOrEmpty(accessToken)
-                        ? new AuthenticationHeaderValue("Bearer", accessToken)
-                        : null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка установки заголовка: {ex.Message}");
-                _httpClient.DefaultRequestHeaders.Authorization = null;
-            }
-        }
+        //        _httpClient.DefaultRequestHeaders.Authorization =
+        //            !string.IsNullOrEmpty(accessToken)
+        //                ? new AuthenticationHeaderValue("Bearer", accessToken)
+        //                : null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Ошибка установки заголовка: {ex.Message}");
+        //        _httpClient.DefaultRequestHeaders.Authorization = null;
+        //    }
+        //}
     }
 }
