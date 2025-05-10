@@ -4,41 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:MobileRequestsService.Views"
-    Shell.FlyoutBehavior="Disabled"
-    Title="MobileRequestsService">
-
-    <Shell.Resources>
-        <!--<Style TargetType="Shell" ApplyToDerivedTypes="True">
-            <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColor}" />
-            <Setter Property="Shell.ForegroundColor" Value="White" />
-            <Setter Property="Shell.TitleColor" Value="White" />
-            --><!--<Setter Property="Shell.SubtitleColor" Value="White" />--><!--
-            <Setter Property="Shell.UnselectedColor" Value="White" />
-            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-            <Setter Property="Shell.TabBarForegroundColor" Value="White" />
-            <Setter Property="Shell.TabBarUnselectedColor" Value="LightGray" />
-            <Setter Property="Shell.TabBarTitleColor" Value="White" />
-        </Style>-->
-    </Shell.Resources>
+    Title="MobileRequestsService"
+    Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage" />
+        Title="LoginView"
+        ContentTemplate="{DataTemplate views:LoginView}"
+        Route="LoginView" />
 
-    <ShellContent
-        Title="Profile"
-        ContentTemplate="{DataTemplate views:ProfilePage}"
-        Route="ProfilePage" />
+    <TabBar>
+        <Tab Title="Мои заявки">
+            <ShellContent ContentTemplate="{DataTemplate views:DocumentOrdersView}" Route="DocumentOrdersView" />
+        </Tab>
 
-    <ShellContent
-        Title="DocumentRequest"
-        ContentTemplate="{DataTemplate views:DocumentRequestPage}"
-        Route="DocumentRequestPage" />
-
-    <ShellContent
-        Title="DocumentHistory"
-        ContentTemplate="{DataTemplate views:DocumentHistoryPage}"
-        Route="DocumentHistoryPage" />
+        <Tab Title="Профиль">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfileView}" />
+        </Tab>
+    </TabBar>
 
 </Shell>

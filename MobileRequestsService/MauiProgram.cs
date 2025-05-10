@@ -8,54 +8,57 @@ using MobileRequestsService.Views;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MobileRequestsService.Handlers;
+using MobileRequestsService.Constants;
+using CommunityToolkit.Maui;
 
 namespace MobileRequestsService;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
-
-        
-        //builder.Services.AddHttpClient("ApiClient", client =>
-        //{
-        //    client.BaseAddress = new Uri("http://10.0.2.2:9090/api");
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //        new MediaTypeWithQualityHeaderValue("application/json"));
-        //})
-        //    .AddHttpMessageHandler<AuthorizationHandler>();
 
         builder.Services
             .AddTransient<AuthorizationHandler>()
-            .AddHttpClient("ApiClient")
-            .ConfigureHttpClient(client => client.BaseAddress = new Uri("http://10.0.2.2:9090/api"))
+            .AddHttpClient(ApplicationConstants.Network.ClientName)
+            .ConfigureHttpClient(client => client.BaseAddress = new Uri(ApplicationConstants.Network.BaseAddress))
             .AddHttpMessageHandler<AuthorizationHandler>();
 
-        builder.Services.AddSingleton<DocumentHistoryViewModel>();
-        builder.Services.AddSingleton<DocumentService>();
-        builder.Services.AddSingleton<LoginViewModel>();
-        builder.Services.AddSingleton<ProfileViewModel>();
-        builder.Services.AddSingleton<AuthenticationService>();
-        builder.Services.AddSingleton<UserDataService>();
+        builder.Services
+            .AddTransient<ITokenService, TokenService>()
+            .AddTransient<IAccountService, AccountService>()
+            .AddTransient<IDocumentOrderService, DocumentOrderService>()
+            .AddTransient<IDepartmentService, DepartmentService>()
+            .AddTransient<IDocumentTypeService, DocumentTypeService>();
 
-        builder.Services.AddTransient<LoginPage>();
-        builder.Services.AddTransient<ProfilePage>();
-        builder.Services.AddTransient<DocumentRequestViewModel>();
-        builder.Services.AddTransient<DocumentHistoryPage>();
-        builder.Services.AddTransient<AuthorizationHandler>();
+        builder.Services
+            .AddTransient<LoginView>()
+            .AddTransient<ProfileView>()
+            .AddTransient<CreateDocumentOrderView>()
+            .AddTransient<DocumentOrdersView>();
+
+        builder.Services
+            .AddTransient<DocumentOrdersVM>()
+            .AddTransient<CreateDocumentOrderVM>()
+            .AddTransient<LoginVM>()
+            .AddTransient<ProfileVM>();
+
+
 
         return builder.Build();
-	}
+    }
 }

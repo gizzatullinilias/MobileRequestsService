@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MobileRequestsService.Views.ProfileView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
+    Title="Profile"
+    x:DataType="vm:ProfileVM">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingViewCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingViewCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+
+    <!--  BackgroundColor="{StaticResource LightGray}">  -->
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Frame
+            Padding="15"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="10">
+            <VerticalStackLayout Spacing="8">
+                <Label
+                    FontSize="Title"
+                    HorizontalOptions="Center"
+                    Text="Профиль пользователя"
+                    TextColor="{StaticResource PrimaryTextColor}" />
+
+                <Label Text="{Binding UserResponse.Username, StringFormat='Username: {0}'}" />
+                <!--  TextColor="{StaticResource PrimaryTextColor}"/>  -->
+                <Label Text="{Binding UserResponse.Lastname, StringFormat='LastName: {0}'}" />
+                <!--  TextColor="{StaticResource PrimaryTextColor}"/>  -->
+                <Label Text="{Binding UserResponse.Firstname, StringFormat='FirstName: {0}'}" />
+                <!--  TextColor="{StaticResource PrimaryTextColor}"/>  -->
+                <Label Text="{Binding UserResponse.Middlename, StringFormat='MiddleName: {0}'}" />
+                <!--  TextColor="{StaticResource PrimaryTextColor}"/>  -->
+                <Label Text="{Binding UserResponse.Role, StringFormat='Role: {0}'}" />
+                <!--  TextColor="{StaticResource PrimaryTextColor}"/>  -->
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button
+            Command="{Binding LogOutCommand}"
+            CornerRadius="8"
+            Text="Выход"
+            TextColor="White" />
+        <!--  BackgroundColor="{StaticResource SecondaryColor}"  -->
+
+        <Button
+            Command="{Binding GoToCreateDocumentOrderViewCommand}"
+            CornerRadius="8"
+            Text="Новая заявка" />
+
+        <Button
+            Command="{Binding GoToDocumentOrdersViewCommand}"
+            CornerRadius="8"
+            Text="История заявок" />
+
+        <Label
+            IsVisible="{Binding ErrorMessage}"
+            Text="{Binding ErrorMessage}"
+            TextColor="Red" />
+
+        <!--<ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource PrimaryColor}"/>-->
+
+    </VerticalStackLayout>
+</ContentPage>

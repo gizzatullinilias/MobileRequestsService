@@ -1,0 +1,58 @@
+<ContentPage
+    x:Class="MobileRequestsService.Views.DocumentOrdersView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:responses="clr-namespace:ColledgeDocument.Shared.Responses;assembly=ColledgeDocument.Shared"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
+    Title="История заявок"
+    x:DataType="vm:DocumentOrdersVM">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToCreateDocumentOrderViewCommand}" Text="Создать заявку" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingViewCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingViewCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+
+    <RefreshView Command="{Binding LoadDocumentOrdersCommand}" IsRefreshing="{Binding IsLoading}">
+        <ScrollView>
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+
+                <Label
+                    IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"
+                    Text="{Binding ErrorMessage}"
+                    TextColor="Red" />
+
+
+                <CollectionView ItemsSource="{Binding DocumentOrders}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type responses:DocumentOrderResponse}">
+
+                            <Frame Margin="0,5" Padding="10">
+                                <StackLayout>
+                                    <Label FontAttributes="Bold" Text="{Binding DocumentType}" />
+                                    <Label Text="{Binding Departament, StringFormat='Отдел: {0}'}" />
+                                    <Label Text="{Binding Quantity, StringFormat='Количество: {0}'}" />
+                                    <Label Text="{Binding OrderStatus, StringFormat='Статус: {0}'}" />
+                                    <Label Text="{Binding CreatedAt, StringFormat='Дата создания: {0:dd.MM.yyyy HH:mm}'}" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button
+                    Command="{Binding LoadNextDataCommand}"
+                    IsVisible="{Binding IsHaveNextPage}"
+                    Text="Показать ещё" />
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsLoading}" />
+                <BoxView BackgroundColor="Transparent" HeightRequest="50" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

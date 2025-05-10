@@ -1,0 +1,62 @@
+<ContentPage
+    x:Class="MobileRequestsService.Views.CreateDocumentOrderView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:responses="clr-namespace:ColledgeDocument.Shared.Responses;assembly=ColledgeDocument.Shared"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:MobileRequestsService.ViewModels"
+    Title="Подача заявления"
+    x:DataType="vm:CreateDocumentOrderVM">
+
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingViewCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingViewCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+
+            <Label
+                IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"
+                Text="{Binding ErrorMessage}"
+                TextColor="Red" />
+
+            <Frame>
+                <StackLayout>
+                    <Label FontAttributes="Bold" Text="Ваши данные:" />
+                    <Label Text="{Binding UserResponse.Lastname, StringFormat='Фамилия: {0}'}" />
+                    <Label Text="{Binding UserResponse.Firstname, StringFormat='Имя: {0}'}" />
+                    <Label Text="{Binding UserResponse.Middlename, StringFormat='Отчество: {0}'}" />
+                </StackLayout>
+            </Frame>
+
+            <Picker
+                Title="Тип документа"
+                ItemDisplayBinding="{Binding Title}"
+                ItemsSource="{Binding DocumentTypes}"
+                SelectedItem="{Binding SelectedDocumentType}" />
+
+            <Picker
+                Title="Отдел"
+                ItemDisplayBinding="{Binding Title}"
+                ItemsSource="{Binding Departments}"
+                SelectedItem="{Binding SelectedDepartment}" />
+
+            <Stepper
+                Increment="1"
+                Maximum="10"
+                Minimum="1"
+                Value="{Binding Quantity}" />
+            <Label HorizontalOptions="Center" Text="{Binding Quantity, StringFormat='Количество: {0}'}" />
+
+            <Button
+                Command="{Binding CreateDocumentOrderCommand}"
+                IsEnabled="True"
+                Text="Подать заявление" />
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

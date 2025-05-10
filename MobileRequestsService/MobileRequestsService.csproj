@@ -58,6 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
@@ -70,18 +71,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\DocumentHistoryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DocumentRequestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <Reference Include="ColledgeDocument.Shared">
+	    <HintPath>ColledgeDocument.Shared.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\DocumentOrdersView.xaml.cs">
+	    <DependentUpon>DocumentOrdersView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\CreateDocumentOrderView.xaml.cs">
+	    <DependentUpon>CreateDocumentOrderView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoginView.xaml.cs">
+	    <DependentUpon>LoginView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ProfileView.xaml.cs">
+	    <DependentUpon>ProfileView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+
 
 </Project>

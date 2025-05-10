@@ -7,6 +7,9 @@ namespace MobileRequestsService
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(
+               nameof(CreateDocumentOrderView), typeof(CreateDocumentOrderView));
         }
     }
 }
